@@ -1,36 +1,48 @@
 /*
 
 GR IX = Tabelle sortiert
-1 mal pro Tabelle
-gut bei Bereichsabfragen   > < aber auch bei eindeutigen Ergebnissen
+1 mal pro Tabelle!!!! daher gut überlegen für welche Spalte er verwendet werden soll..
+
+gut bei Bereichsabfragen  !!!! > < aber auch bei eindeutigen Ergebnissen
 Tipp: leg zuerst den CL IX auf die Spalte fest, die häufig nach Bereichen abgefragt wird
 ---dann PK 
 
 PK muss kein CL IX sein!!  er muss eindeutig sein
 
-N GR IX = zusätzliche mit meist nicht allen Spalten der Tabellen
+N GR IX = zusätzliche Kopie der Daten - mit meist nicht allen Spalten der Tabellen
 ca 1000 pro Tabelle
 wenn rel wenige DS rauskommt--- LOOKUP!!!!
 
+--VARIANTEN
 
-*/
+eindeutiger  IX  !  ..  Schlüsselspalten dürfen nur einmal vorkommen
 
-eindeutigen IX  !
-abdeckender IX  !! --IX Seek ohne Lookup
-IX mit eingeschl Spalten !!
-gefilterten IX nicht alle DS in INdex, dann aber weniger Ebene im Index, sonst lohnt es sich nicht
+abdeckender IX  !! --IX Seek ohne Lookup.. de ridelae IX zur Abfrage
 
-part IX wie viele gefilterte IX
+IX mit eingeschl Spalten !!   .. zusätzliche Spalten des where belasten nicht den IX Baum
 
-ind Sicht  (bei AGG durchaus sinnvoll, aber count_big())
+gefilterten IX .....nicht alle DS in IX Baum, lohnt sich, wenn weniger Ebene im Index
+..zB gefiltert auf Land vs IX Welt weniger günstig  --> besser IX auf Stadt vs IX Welt
 
-realen hypoth IX
+
+part IX wie viele gefilterte IX.. Unterschied.. komfortabler und deckt jeden Wert ab
+
+ind Sicht  (bei AGG durchaus sinnvoll, aber sehr viele Auflagen.. oft nicht einsetzbar
+
+realen hypoth IX.. werden nur vom Tool Datenbankoptimierungsassistent eingesetzt
+
 zusammengesetzter IX   !!
 --- kann max 16 Spalten umfassen
 -- mehr als 4 Spalten machen oft keinen Sinn
 --macht nur SInn mehr Spalten reinzunehmen, wenn auch die Sp im where vorkommen
+--belasten den Baum
 
 Columnstore IX
+
+super IX mit kleineren Macken... Daten werden stark komprimiert spaltenweise abgelegt.
+Manko: Neue DS landem im delatstore =  HEAP....
+
+*/
 
 
 Admin muss repr Workload optimieren

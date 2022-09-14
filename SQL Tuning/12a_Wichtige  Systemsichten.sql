@@ -20,3 +20,5 @@ select * from sys.dm_os_wait_stats
 --RUNNABLE: Wartet auf CPU 
 
 
+..und dann npoch viele hundert andere.. siehe Glenn Berry 
+Z_SQL Server 2019 Diagnostic Information Queries.sql
